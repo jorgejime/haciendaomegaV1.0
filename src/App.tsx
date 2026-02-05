@@ -8,6 +8,7 @@ import { MyBidsPage } from './pages/MyBidsPage';
 import { FavoritesPage } from './pages/FavoritesPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { CreateLotPage } from './pages/CreateLotPage';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/create-lot" element={<CreateLotPage />} />
+          <Route path="/admin/edit-lot/:id" element={<CreateLotPage />} />
           <Route path="*" element={<div className="text-center py-20 text-gray-500">Próximamente...</div>} />
         </Routes>
       </Layout>

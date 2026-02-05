@@ -37,7 +37,10 @@ export const AdminDashboard: React.FC = () => {
                     <h1 className="text-2xl font-black text-gray-900 dark:text-white">Backoffice</h1>
                     <p className="text-sm text-gray-500">Gestión Administrativa Hacienda Omega</p>
                 </div>
-                <button className="bg-primary text-white p-2.5 rounded-xl flex items-center gap-2 font-bold text-sm shadow-lg shadow-primary/20">
+                <button
+                    onClick={() => window.location.href = '/admin/create-lot'}
+                    className="bg-primary text-white p-2.5 rounded-xl flex items-center gap-2 font-bold text-sm shadow-lg shadow-primary/20"
+                >
                     <Plus size={20} />
                     Nuevo Lote
                 </button>
@@ -55,8 +58,8 @@ export const AdminDashboard: React.FC = () => {
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id as any)}
                         className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${activeTab === tab.id
-                                ? 'bg-primary text-white shadow-md shadow-primary/20'
-                                : 'bg-white dark:bg-surface-dark text-gray-500 border border-gray-100 dark:border-gray-800'
+                            ? 'bg-primary text-white shadow-md shadow-primary/20'
+                            : 'bg-white dark:bg-surface-dark text-gray-500 border border-gray-100 dark:border-gray-800'
                             }`}
                     >
                         <tab.icon size={18} />
