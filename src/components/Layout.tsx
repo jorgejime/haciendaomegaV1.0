@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, Bell, Home, Gavel, Heart, User, X, Settings, LogOut, Info, ShieldCheck } from 'lucide-react';
+import { Menu, Bell, Home, Gavel, Heart, User, X, Settings, LogOut, Info, ShieldCheck, LayoutDashboard } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -14,6 +14,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         { icon: User, label: 'Mi Cuenta', path: '/profile' },
         { icon: Gavel, label: 'Mis Ofertas', path: '/bids' },
         { icon: Heart, label: 'Favoritos', path: '/favorites' },
+        { icon: LayoutDashboard, label: 'Backoffice', path: '/admin' },
         { icon: ShieldCheck, label: 'Verificaciones', path: '/verify' },
         { icon: Settings, label: 'Configuración', path: '/settings' },
         { icon: Info, label: 'Ayuda y Soporte', path: '/help' },

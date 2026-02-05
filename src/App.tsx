@@ -7,6 +7,7 @@ import { CheckoutPage } from './pages/CheckoutPage';
 import { MyBidsPage } from './pages/MyBidsPage';
 import { FavoritesPage } from './pages/FavoritesPage';
 import { ProfilePage } from './pages/ProfilePage';
+import { AdminDashboard } from './pages/AdminDashboard';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/bids" element={<MyBidsPage />} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="*" element={<div className="text-center py-20 text-gray-500">Próximamente...</div>} />
         </Routes>
       </Layout>
