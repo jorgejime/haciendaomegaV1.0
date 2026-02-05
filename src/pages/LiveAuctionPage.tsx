@@ -12,9 +12,9 @@ export const LiveAuctionPage: React.FC = () => {
 
     const [currentPrice, setCurrentPrice] = useState(lot.currentBid || lot.basePrice);
     const [bids, setBids] = useState<Bid[]>([
-        { id: '1', userId: 'u1', userName: 'Usuario 45', amount: 45000000, timestamp: '1s', isTop: true },
-        { id: '2', userId: 'u2', userName: 'Ganadería ZZ', amount: 44900000, timestamp: '5s' },
-        { id: '3', userId: 'u3', userName: 'Juan P.', amount: 44800000, timestamp: '12s' },
+        { id: '1', lotId: id || '1', userId: 'u1', userName: 'Usuario 45', amount: 45000000, timestamp: '1s', isTop: true },
+        { id: '2', lotId: id || '1', userId: 'u2', userName: 'Ganadería ZZ', amount: 44900000, timestamp: '5s' },
+        { id: '3', lotId: id || '1', userId: 'u3', userName: 'Juan P.', amount: 44800000, timestamp: '12s' },
     ]);
     const [showOutbidAlert, setShowOutbidAlert] = useState(false);
 
@@ -25,6 +25,7 @@ export const LiveAuctionPage: React.FC = () => {
                 const newAmount = currentPrice + 100000;
                 const newBid: Bid = {
                     id: Math.random().toString(),
+                    lotId: id || '1',
                     userId: 'bot',
                     userName: `Ganadería ${['Alfa', 'Beta', 'Omega'][Math.floor(Math.random() * 3)]}`,
                     amount: newAmount,
@@ -44,6 +45,7 @@ export const LiveAuctionPage: React.FC = () => {
         const newAmount = currentPrice + increment;
         const myBid: Bid = {
             id: Math.random().toString(),
+            lotId: id || '1',
             userId: 'me',
             userName: 'Tú',
             amount: newAmount,
@@ -149,8 +151,8 @@ export const LiveAuctionPage: React.FC = () => {
                                 initial={index === 0 ? { scale: 0.9, opacity: 0 } : false}
                                 animate={{ scale: 1, opacity: 1 }}
                                 className={`p-3 rounded-xl flex items-center justify-between transition-all ${bid.isTop
-                                        ? 'bg-white dark:bg-surface-dark border-l-4 border-primary shadow-sm'
-                                        : 'bg-white/60 dark:bg-surface-dark/60 grayscale opacity-70'
+                                    ? 'bg-white dark:bg-surface-dark border-l-4 border-primary shadow-sm'
+                                    : 'bg-white/60 dark:bg-surface-dark/60 grayscale opacity-70'
                                     }`}
                             >
                                 <div className="flex items-center gap-3">
@@ -184,12 +186,13 @@ export const LiveAuctionPage: React.FC = () => {
                             <button
                                 key={inc}
                                 onClick={() => handleBid(inc)}
-                                className="py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-xs font-semibold text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
+                                className="py-3 rounded-xl border-2 border-primary/30 text-sm font-bold text-primary bg-primary/5 hover:bg-primary hover:text-white hover:border-primary active:scale-95 transition-all"
                             >
-                                +{(inc / 1000)}k
+                                +${(inc / 1000)}k
                             </button>
                         ))}
                     </div>
+
                     <button
                         onClick={() => handleBid(100000)}
                         className="w-full bg-primary hover:bg-primary-dark active:scale-[0.98] transition-all transform shadow-lg shadow-primary/30 h-14 rounded-xl flex items-center justify-center gap-2 group relative overflow-hidden"
