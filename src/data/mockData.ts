@@ -1,6 +1,6 @@
 import type { Lot } from '../types';
 
-// URLs verificadas de imágenes de ganado bovino (Pexels - acceso público sin restricciones)
+// URLs verificadas de imágenes de ganado bovino
 export const mockLots: Lot[] = [
     {
         id: '1',
@@ -80,9 +80,9 @@ export const mockLots: Lot[] = [
         sellerId: '1',
         basePrice: 28000000,
         status: 'upcoming',
-        imageUrl: 'https://images.pexels.com/photos/2255459/pexels-photo-2255459.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: 'https://images.pexels.com/photos/422218/pexels-photo-422218.jpeg?auto=compress&cs=tinysrgb&w=800',
         images: [
-            'https://images.pexels.com/photos/2255459/pexels-photo-2255459.jpeg?auto=compress&cs=tinysrgb&w=800'
+            'https://images.pexels.com/photos/422218/pexels-photo-422218.jpeg?auto=compress&cs=tinysrgb&w=800'
         ],
         description: 'Novilla de primer parto con excelente desarrollo corporal. Vacunación completa.',
         createdAt: '2024-01-18',
@@ -101,9 +101,9 @@ export const mockLots: Lot[] = [
         sellerId: '1',
         basePrice: 62000000,
         status: 'upcoming',
-        imageUrl: 'https://images.pexels.com/photos/162240/bull-calf-heifer-dairy-cattle-162240.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: 'https://images.pexels.com/photos/735968/pexels-photo-735968.jpeg?auto=compress&cs=tinysrgb&w=800',
         images: [
-            'https://images.pexels.com/photos/162240/bull-calf-heifer-dairy-cattle-162240.jpeg?auto=compress&cs=tinysrgb&w=800'
+            'https://images.pexels.com/photos/735968/pexels-photo-735968.jpeg?auto=compress&cs=tinysrgb&w=800'
         ],
         description: 'Reproductor de élite con registro genealógico. Probado en campo con excelentes resultados.',
         createdAt: '2024-01-19',
@@ -122,9 +122,9 @@ export const mockLots: Lot[] = [
         sellerId: 'seller2',
         basePrice: 35000000,
         status: 'upcoming',
-        imageUrl: 'https://images.pexels.com/photos/936958/pexels-photo-936958.jpeg?auto=compress&cs=tinysrgb&w=800',
+        imageUrl: 'https://images.pexels.com/photos/458991/pexels-photo-458991.jpeg?auto=compress&cs=tinysrgb&w=800',
         images: [
-            'https://images.pexels.com/photos/936958/pexels-photo-936958.jpeg?auto=compress&cs=tinysrgb&w=800'
+            'https://images.pexels.com/photos/458991/pexels-photo-458991.jpeg?auto=compress&cs=tinysrgb&w=800'
         ],
         description: 'Vaca lechera de alta producción. Promedio de 25 litros diarios. Excelente conformación de ubre.',
         createdAt: '2024-01-20',
