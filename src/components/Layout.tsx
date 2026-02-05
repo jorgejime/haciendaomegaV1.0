@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Menu, Bell, Home, Gavel, Heart, User, X, Settings, LogOut, Info, ShieldCheck, LayoutDashboard } from 'lucide-react';
+import { Menu, Bell, Home, Gavel, Heart, User, X, Settings, LogOut, Info, ShieldCheck, LayoutDashboard, Store } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../context/AuthContext';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -9,16 +10,60 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { user, hasRole, hasAnyRole } = useAuth();
 
-    const menuItems = [
-        { icon: User, label: 'Mi Cuenta', path: '/profile' },
-        { icon: Gavel, label: 'Mis Ofertas', path: '/bids' },
-        { icon: Heart, label: 'Favoritos', path: '/favorites' },
-        { icon: LayoutDashboard, label: 'Backoffice', path: '/admin' },
-        { icon: ShieldCheck, label: 'Verificaciones', path: '/verify' },
-        { icon: Settings, label: 'Configuración', path: '/settings' },
-        { icon: Info, label: 'Ayuda y Soporte', path: '/help' },
-    ];
+    // Menú dinámico según el rol del usuario
+    const getMenuItems = () => {
+        const baseItems = [
+            { icon: User, label: 'Mi Cuenta', path: '/profile', roles: ['buyer', 'seller', 'admin', 'auctioneer'] },
+        ];
+
+        // Items para compradores
+        if (hasAnyRole(['buyer', 'admin'])) {
+            baseItems.push(
+                { icon: Gavel, label: 'Mis Ofertas', path: '/bids', roles: ['buyer', 'admin'] },
+                { icon: Heart, label: 'Favoritos', path: '/favorites', roles: ['buyer', 'admin'] }
+            );
+        }
+
+        // Items para vendedores
+        if (hasAnyRole(['seller', 'admin'])) {
+            baseItems.push(
+                { icon: Store, label: 'Mi Ganadería', path: '/seller', roles: ['seller', 'admin'] }
+            );
+        }
+
+        // Items para administradores
+        if (hasRole('admin')) {
+            baseItems.push(
+                { icon: LayoutDashboard, label: 'Backoffice Admin', path: '/admin', roles: ['admin'] }
+            );
+        }
+
+        // Items comunes
+        baseItems.push(
+            { icon: ShieldCheck, label: 'Verificaciones', path: '/verify', roles: ['buyer', 'seller', 'admin', 'auctioneer'] },
+            { icon: Settings, label: 'Configuración', path: '/settings', roles: ['buyer', 'seller', 'admin', 'auctioneer'] },
+            { icon: Info, label: 'Ayuda y Soporte', path: '/help', roles: ['buyer', 'seller', 'admin', 'auctioneer'] }
+        );
+
+        return baseItems.filter(item =>
+            user && item.roles.includes(user.role)
+        );
+    };
+
+    const menuItems = getMenuItems();
+
+    // Badge de rol
+    const getRoleBadge = () => {
+        const badges = {
+            admin: { label: 'Administrador', color: 'text-red-500 bg-red-50 dark:bg-red-900/20' },
+            seller: { label: 'Vendedor', color: 'text-blue-500 bg-blue-50 dark:bg-blue-900/20' },
+            buyer: { label: 'Comprador Premium', color: 'text-primary bg-primary/10' },
+            auctioneer: { label: 'Rematador', color: 'text-purple-500 bg-purple-50 dark:bg-purple-900/20' }
+        };
+        return user ? badges[user.role] : badges.buyer;
+    };
 
     return (
         <div className="min-h-screen bg-background-light dark:bg-background-dark font-display flex flex-col max-w-md mx-auto shadow-2xl relative overflow-x-hidden">
@@ -47,6 +92,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                                 <button
                                     onClick={() => setIsMenuOpen(false)}
                                     className="p-2 rounded-full bg-gray-100 dark:bg-gray-800"
+                                    aria-label="Cerrar menú"
                                 >
                                     <X size={20} />
                                 </button>
@@ -54,11 +100,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
                             <div className="flex items-center gap-4 mb-10 p-4 rounded-2xl bg-gray-50 dark:bg-gray-800/50">
                                 <div className="size-12 rounded-full overflow-hidden border-2 border-primary">
-                                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100" alt="Profile" />
+                                    <img src={user?.avatar} alt="Profile" />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-sm">Jorge Jiménez</h3>
-                                    <p className="text-[10px] text-primary font-bold tracking-widest uppercase">Premium Member</p>
+                                    <h3 className="font-bold text-sm">{user?.name}</h3>
+                                    <p className={`text-[10px] font-bold tracking-widest uppercase ${getRoleBadge().color} px-2 py-0.5 rounded-full inline-block mt-1`}>
+                                        {getRoleBadge().label}
+                                    </p>
                                 </div>
                             </div>
 
@@ -116,7 +164,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                         <img
                             alt="Profile"
                             className="h-full w-full object-cover"
-                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100"
+                            src={user?.avatar}
                         />
                     </div>
                 </div>
@@ -143,32 +191,55 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                             </>
                         )}
                     </NavLink>
-                    <NavLink
-                        to="/bids"
-                        className={({ isActive }) =>
-                            `flex flex-col items-center gap-1 transition-colors ${isActive ? 'text-primary' : 'text-gray-400 dark:text-gray-500'}`
-                        }
-                    >
-                        {({ isActive }) => (
-                            <>
-                                <Gavel size={24} fill="currentColor" fillOpacity={isActive ? 0.2 : 0} />
-                                <span className="text-[10px] font-medium">Ofertas</span>
-                            </>
-                        )}
-                    </NavLink>
-                    <NavLink
-                        to="/favorites"
-                        className={({ isActive }) =>
-                            `flex flex-col items-center gap-1 transition-colors ${isActive ? 'text-primary' : 'text-gray-400 dark:text-gray-500'}`
-                        }
-                    >
-                        {({ isActive }) => (
-                            <>
-                                <Heart size={24} fill="currentColor" fillOpacity={isActive ? 0.2 : 0} />
-                                <span className="text-[10px] font-medium">Favoritos</span>
-                            </>
-                        )}
-                    </NavLink>
+
+                    {hasAnyRole(['buyer', 'admin']) && (
+                        <NavLink
+                            to="/bids"
+                            className={({ isActive }) =>
+                                `flex flex-col items-center gap-1 transition-colors ${isActive ? 'text-primary' : 'text-gray-400 dark:text-gray-500'}`
+                            }
+                        >
+                            {({ isActive }) => (
+                                <>
+                                    <Gavel size={24} fill="currentColor" fillOpacity={isActive ? 0.2 : 0} />
+                                    <span className="text-[10px] font-medium">Ofertas</span>
+                                </>
+                            )}
+                        </NavLink>
+                    )}
+
+                    {hasAnyRole(['seller', 'admin']) && (
+                        <NavLink
+                            to="/seller"
+                            className={({ isActive }) =>
+                                `flex flex-col items-center gap-1 transition-colors ${isActive ? 'text-primary' : 'text-gray-400 dark:text-gray-500'}`
+                            }
+                        >
+                            {({ isActive }) => (
+                                <>
+                                    <Store size={24} fill="currentColor" fillOpacity={isActive ? 0.2 : 0} />
+                                    <span className="text-[10px] font-medium">Ganadería</span>
+                                </>
+                            )}
+                        </NavLink>
+                    )}
+
+                    {hasAnyRole(['buyer', 'admin']) && (
+                        <NavLink
+                            to="/favorites"
+                            className={({ isActive }) =>
+                                `flex flex-col items-center gap-1 transition-colors ${isActive ? 'text-primary' : 'text-gray-400 dark:text-gray-500'}`
+                            }
+                        >
+                            {({ isActive }) => (
+                                <>
+                                    <Heart size={24} fill="currentColor" fillOpacity={isActive ? 0.2 : 0} />
+                                    <span className="text-[10px] font-medium">Favoritos</span>
+                                </>
+                            )}
+                        </NavLink>
+                    )}
+
                     <NavLink
                         to="/profile"
                         className={({ isActive }) =>
