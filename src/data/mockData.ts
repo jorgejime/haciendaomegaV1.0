@@ -1,5 +1,6 @@
 import type { Lot } from '../types';
 
+// URLs verificadas de imágenes de ganado bovino (Pexels - acceso público sin restricciones)
 export const mockLots: Lot[] = [
     {
         id: '1',
@@ -15,13 +16,12 @@ export const mockLots: Lot[] = [
         basePrice: 45000000,
         currentBid: 45200000,
         status: 'live',
-        imageUrl: 'https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&q=80&w=800',
+        imageUrl: 'https://images.pexels.com/photos/422218/pexels-photo-422218.jpeg?auto=compress&cs=tinysrgb&w=800',
         images: [
-            'https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&q=80&w=800',
-            'https://images.unsplash.com/photo-1596044438115-0b8b0c0b0b0b?auto=format&fit=crop&q=80&w=800'
+            'https://images.pexels.com/photos/422218/pexels-photo-422218.jpeg?auto=compress&cs=tinysrgb&w=800'
         ],
-        youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-        description: 'Ejemplar de excelente estructura ósea y musculatura bien definida. Ideal para mejoramiento genético en climas tropicales. Certificado sanitario al día.',
+        youtubeUrl: '',
+        description: 'Ejemplar de excelente estructura ósea y musculatura bien definida. Ideal para mejoramiento genético en climas tropicales.',
         createdAt: '2024-01-15',
         auctionDate: '2024-02-05'
     },
@@ -39,9 +39,9 @@ export const mockLots: Lot[] = [
         basePrice: 38000000,
         currentBid: 38500000,
         status: 'live',
-        imageUrl: 'https://images.unsplash.com/photo-1584267901956-f92e482c6b8c?auto=format&fit=crop&q=80&w=800',
+        imageUrl: 'https://images.pexels.com/photos/735968/pexels-photo-735968.jpeg?auto=compress&cs=tinysrgb&w=800',
         images: [
-            'https://images.unsplash.com/photo-1584267901956-f92e482c6b8c?auto=format&fit=crop&q=80&w=800'
+            'https://images.pexels.com/photos/735968/pexels-photo-735968.jpeg?auto=compress&cs=tinysrgb&w=800'
         ],
         description: 'Hembra de alta genética con excelente conformación. Apta para reproducción.',
         createdAt: '2024-01-16'
@@ -59,9 +59,9 @@ export const mockLots: Lot[] = [
         sellerId: 'seller3',
         basePrice: 52000000,
         status: 'upcoming',
-        imageUrl: 'https://images.unsplash.com/photo-1605291854907-f6bb0e6c2e0f?auto=format&fit=crop&q=80&w=800',
+        imageUrl: 'https://images.pexels.com/photos/458991/pexels-photo-458991.jpeg?auto=compress&cs=tinysrgb&w=800',
         images: [
-            'https://images.unsplash.com/photo-1605291854907-f6bb0e6c2e0f?auto=format&fit=crop&q=80&w=800'
+            'https://images.pexels.com/photos/458991/pexels-photo-458991.jpeg?auto=compress&cs=tinysrgb&w=800'
         ],
         description: 'Toro Angus de línea genética importada. Excelente para cruce comercial.',
         createdAt: '2024-01-17',
@@ -80,9 +80,9 @@ export const mockLots: Lot[] = [
         sellerId: '1',
         basePrice: 28000000,
         status: 'upcoming',
-        imageUrl: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&q=80&w=800',
+        imageUrl: 'https://images.pexels.com/photos/2255459/pexels-photo-2255459.jpeg?auto=compress&cs=tinysrgb&w=800',
         images: [
-            'https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&q=80&w=800'
+            'https://images.pexels.com/photos/2255459/pexels-photo-2255459.jpeg?auto=compress&cs=tinysrgb&w=800'
         ],
         description: 'Novilla de primer parto con excelente desarrollo corporal. Vacunación completa.',
         createdAt: '2024-01-18',
@@ -101,9 +101,9 @@ export const mockLots: Lot[] = [
         sellerId: '1',
         basePrice: 62000000,
         status: 'upcoming',
-        imageUrl: 'https://images.unsplash.com/photo-1591608971362-f08b2a75731a?auto=format&fit=crop&q=80&w=800',
+        imageUrl: 'https://images.pexels.com/photos/162240/bull-calf-heifer-dairy-cattle-162240.jpeg?auto=compress&cs=tinysrgb&w=800',
         images: [
-            'https://images.unsplash.com/photo-1591608971362-f08b2a75731a?auto=format&fit=crop&q=80&w=800'
+            'https://images.pexels.com/photos/162240/bull-calf-heifer-dairy-cattle-162240.jpeg?auto=compress&cs=tinysrgb&w=800'
         ],
         description: 'Reproductor de élite con registro genealógico. Probado en campo con excelentes resultados.',
         createdAt: '2024-01-19',
@@ -122,9 +122,9 @@ export const mockLots: Lot[] = [
         sellerId: 'seller2',
         basePrice: 35000000,
         status: 'upcoming',
-        imageUrl: 'https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&q=80&w=800',
+        imageUrl: 'https://images.pexels.com/photos/936958/pexels-photo-936958.jpeg?auto=compress&cs=tinysrgb&w=800',
         images: [
-            'https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&q=80&w=800'
+            'https://images.pexels.com/photos/936958/pexels-photo-936958.jpeg?auto=compress&cs=tinysrgb&w=800'
         ],
         description: 'Vaca lechera de alta producción. Promedio de 25 litros diarios. Excelente conformación de ubre.',
         createdAt: '2024-01-20',
